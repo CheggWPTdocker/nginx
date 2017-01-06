@@ -1,12 +1,12 @@
-FROM cheggwpt/alpine:edge
+FROM cheggwpt/alpine:3.5
 
-# install ruby basic packages
+# Install Nginx
 # clean up the apk cache (no-cache still caches the indexes)
 # Make the app directory
 # install the fake sqs gem without docs
-RUN	apk --update --no-cache add \
-		--virtual .nginx_service nginx supervisor && \
-		rm -rf /var/cache/apk/* 
+RUN apk --update --no-cache add \
+	--virtual .nginx_service nginx && \
+	rm -rf /var/cache/apk/* 
 
 # Add the files
 COPY container_confs /
@@ -31,8 +31,3 @@ EXPOSE 80 443
 # expose the app volume
 VOLUME ["/webroot"]
 
-# the entry point definition
-ENTRYPOINT ["/entrypoint.sh"]
-
-# default command for entrypoint.sh
-CMD ["supervisord"]
