@@ -28,6 +28,6 @@ RUN mkdir -p /run/nginx /run/supervisord /webroot && \
 # Expose the ports for nginx
 EXPOSE 80 443
 
-# expose the app volume
-VOLUME ["/webroot"]
+# expose the app volume - DON'T DO THIS HERE
+# VOLUME ["/webroot"]
 
