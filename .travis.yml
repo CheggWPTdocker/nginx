@@ -10,13 +10,12 @@ language:
 node_js:
   - "6"
 
-before_istall:
-  - docker build --no-cache -t nginx_test .
-  - docker run -d -p 127.0.0.1:8080:80 --name nginx_test nginx_test
-
 install:
   - npm install -g dockerlint
 
+before_script:
+  - docker build --no-cache -t nginx_test .
+  - docker run -d -p 127.0.0.1:8080:80 --name nginx_test nginx_test
 
 script: 
   - dockerlint Dockerfile
