@@ -1,11 +1,11 @@
 #!/bin/sh
 
-echo -n 'HTTP test: '
-RESULT=`curl -vsf -H 'Accept-Encoding: gzip' 'http://localhost:80/' &> /dev/stdout | grep -i '200 OK'`
+CONTENT=$(curl -is -H 'Accept-Encoding: gzip' -D - 'http://localhost:80/' -o /dev/null | grep -i '200 OK' )
+RESULT=$?
 if [ $RESULT -eq 0 ]; then
-    echo OK
+    echo 'HTTP test: OK'
     exit 0
 else
-    echo FAILED with $RESULT
+    echo 'HTTP test: FAILED with $RESULT'
     exit $RESULT
 fi
