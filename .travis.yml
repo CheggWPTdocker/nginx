@@ -18,8 +18,8 @@ before_script:
   - docker run -d -p 127.0.0.1:8080:80 --name nginx_test nginx_test
 
 script: 
-  - docker logs nginx_test
   - dockerlint Dockerfile
   - docker ps | grep -q nginx_test
   - .travis/test_http.sh
   - .travis/test_gzip.sh
+  - docker logs nginx_test
