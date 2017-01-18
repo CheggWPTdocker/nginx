@@ -13,8 +13,11 @@ install:
 
 script: 
   - dockerlint Dockerfile
-  - docker build -t nginx_test .
+  - docker build --no-cache -t nginx_test .
   - docker run -d -p 127.0.0.1:80:80 --name nginx_test nginx_test
   - docker ps | grep -q nginx_test
   - .travis/test_http.sh
   - .travis/test_gzip.sh
+  - docker kill nginx_test
+  - docker rm nginx_test
+  - docker rmi nginx_test
