@@ -9,5 +9,5 @@ if [ $RESULT -eq 0 ]; then
     exit 0
 else
     echo FAIL
-    echo $RESULT
+    exit $RESULT
 fi
