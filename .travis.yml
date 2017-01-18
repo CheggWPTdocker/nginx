@@ -10,10 +10,11 @@ node_js:
 
 install:
   - npm install -g dockerlint
-  - docker build -t nginx .
-  - docker run -d -p 127.0.0.1:80:80 --name nginx nginx
 
 script: 
   - dockerlint Dockerfile
+  - docker build -t nginx .
+  - docker run -d -p 127.0.0.1:80:80 --name nginx nginx
   - docker ps | grep -q nginx
-  - curl -vsf 'http://127.0.0.1:80/index.html' &> /dev/stdout
+  - curl -vsf 'http://127.0.0.1:80/' &> /dev/stdout
+  - curl -vsf -H 'Accept-Encoding: gzip' 'http://127.0.0.1:80/' &> /dev/stdout | grep -i 'Content-Encoding: gzip'
