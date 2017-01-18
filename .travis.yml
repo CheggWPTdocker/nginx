@@ -16,3 +16,4 @@ install:
 script: 
   - dockerlint Dockerfile
   - docker ps | grep -q nginx
+  - curl -vsf 'http://127.0.0.1:80/index.html' &> /dev/stdout
