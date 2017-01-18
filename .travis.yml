@@ -24,5 +24,4 @@ script:
 #  - .travis/test_http.sh
 #  - .travis/test_gzip.sh
   - docker logs nginx_test
-  - docker exec -d nginx_test "cat /var/log/nginx/error.log"
-  
+  - docker exec -d nginx_test /bin/sh -c "cat /var/log/nginx/error.log"
