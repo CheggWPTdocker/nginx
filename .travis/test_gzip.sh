@@ -1,12 +1,11 @@
 #!/bin/sh
 
 echo -n 'GZIP test: '
-curl -vsf -H 'Accept-Encoding: gzip' 'http://localhost:80/' &> /dev/stdout | grep -i 'Content-Encoding: gzip'
-RESULT=$?
+RESULT=`curl -vsf -H 'Accept-Encoding: gzip' 'http://localhost:80/' &> /dev/stdout | grep -i 'Content-Encoding: gzip'`
 if [ $RESULT -eq 0 ]; then
     echo OK
     exit 0
 else
-    echo FAIL
+    echo FAILED with $RESULT
     exit $RESULT
 fi
