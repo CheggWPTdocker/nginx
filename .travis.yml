@@ -10,8 +10,9 @@ node_js:
 
 install:
   - npm install -g dockerlint
+  - docker build -t nginx .
+  - docker run -d -p 127.0.0.1:80:80 --name nginx nginx
 
 script: 
   - dockerlint Dockerfile
-  - docker build .
-
+  - docker ps | grep -q nginx
