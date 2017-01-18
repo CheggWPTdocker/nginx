@@ -15,14 +15,14 @@ install:
 
 before_script:
   - docker build --no-cache -t nginx_test .
-  - docker run -d -p 127.0.0.1:80:80 --name nginx_test nginx_test
+  - docker run -d -p 127.0.0.1:80:80 --name nginx_test nginx_test sh -c "nginx"
   - docker ps -as
 
 script: 
   - dockerlint Dockerfile
   - docker ps | grep -q nginx_test
-#  - .travis/test_http.sh
-#  - .travis/test_gzip.sh
+  - .travis/test_http.sh
+  - .travis/test_gzip.sh
   - docker exec -i nginx_test /bin/sh -c "cat /var/log/nginx/error.log"
   - docker exec -i nginx_test /bin/sh -c "supervisorctl status"
   - docker logs nginx_test
