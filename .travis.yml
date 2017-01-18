@@ -13,8 +13,8 @@ install:
 
 script: 
   - dockerlint Dockerfile
-  - docker build -t nginx .
-  - docker run -d -p 127.0.0.1:80:80 --name nginx nginx
-  - docker ps | grep -q nginx
-  - curl -vsf 'http://127.0.0.1:80/' &> /dev/stdout
-  - curl -vsf -H 'Accept-Encoding: gzip' 'http://127.0.0.1:80/' &> /dev/stdout | grep -i 'Content-Encoding: gzip'
+  - docker build -t nginx_test .
+  - docker run -d -p 127.0.0.1:80:80 --name nginx_test nginx_test
+  - docker ps | grep -q nginx_test
+  - .travis/test_http.sh
+  - .travis/test_gzip.sh
