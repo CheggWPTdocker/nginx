@@ -13,8 +13,9 @@ tag_latest:
 
 test:
 	docker build -t nginx_test .
-	docker run -d -p 127.0.0.1:80:80 --name nginx_test nginx_test
-	curl -vsf -H 'Accept-Encoding: gzip' 'http://127.0.0.1:80/' &> /dev/stdout
+	docker run -d -p 127.0.0.1:8080:80 --name nginx_test nginx_test
+	curl -vsf -H 'Accept-Encoding: gzip' 'http://127.0.0.1:8080/' &> /dev/stdout
+	curl -vsf 'http://127.0.0.1:8080/' &> /dev/stdout
 	docker kill nginx_test
 	docker rm nginx_test
 	docker rmi nginx_test
