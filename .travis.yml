@@ -1,9 +1,11 @@
-sudo: required
+sudo: 
+  - required
 
 services:
   - docker
 
-language: node_js
+language: 
+  - node_js
 
 node_js:
   - "6"
@@ -11,7 +13,14 @@ node_js:
 install:
   - npm install -g dockerlint
 
+before_script:
+  - docker build --no-cache -t nginx_test .
+  - docker run -d -p 127.0.0.1:80:80 --name nginx_test nginx_test sh -c "nginx"
+  - docker ps -as
+
 script: 
   - dockerlint Dockerfile
-  - docker build .
-
+  - docker ps | grep -q nginx_test
+  - .travis/test_http.sh
+  - .travis/test_gzip.sh
+  - docker logs nginx_test
