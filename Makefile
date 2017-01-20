@@ -1,5 +1,5 @@
 NAME = cheggwpt/nginx
-VERSION = 0.0.6
+VERSION = 0.0.8
 
 .PHONY: all build test tag_latest release ssh
 
